@@ -36,6 +36,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+gem 'active_model_serializers'
 
 
 # Use Capistrano for deployment

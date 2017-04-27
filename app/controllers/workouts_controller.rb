@@ -30,7 +30,7 @@ class WorkoutsController < ApplicationController
   def show
     respond_to do |f|
       f.html {render :show}
-      f.json {render json: @workout} 
+      f.json {render json: @workout}
 
     end
 

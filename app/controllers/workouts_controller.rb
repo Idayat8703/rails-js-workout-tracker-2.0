@@ -28,6 +28,11 @@ class WorkoutsController < ApplicationController
 
   # shows the details of a specific workout
   def show
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @workout} 
+
+    end
 
   end
 

@@ -1,23 +1,13 @@
+[]Use jQuery for implementing new requirements
+[]Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
+[]Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
+[]Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
+[]Include at least one link that loads or updates a resource without reloading the page.
+[]Translate JSON responses into js model objects.
+[]At least one of the js model objects must have at least one method added by your code to the prototype.
+Confirm
 
-    Using Ruby on Rails for the project
-    Include at least one has_many relationship (User has_many Collections)
-    Include at least one belongs_to relationship (Recipe belongs_to User)
-    Include at least one has_many through relationship (Recipe has_many Ingredients through Quantities)
-    The "through" part of the has_many through includes at least one user submittable attribute (quantities.amount)
-    Include reasonable validations for simple model objects (User, Recipe, Ingredient, Collection)
-    Include a class level ActiveRecord scope method ( Recipes.most_collected URL: /recipes/most_collected)
-    Include a nested form writing to an associated model using a custom attribute writer (user/:user_id/recipes/new, Quantity)
-    Include signup (Devise)
-    Include login (Devise)
-    Include logout (Devise)
-    Include third party signup/login (Devise/OmniAuth(Github))
-    Include nested resource show or index (user/:user_id/collections, user/:user_id/recipes)
-    Include nested resource "new" form (user/:user_id/recipes/new)
-    Include form display of validation errors (form user/:user_id/recipes/new)
-
-Confirm:
-
-    The application is pretty DRY
-    Limited logic in controllers
-    Views use helper methods if appropriate
-    Views use partials if appropriate
+[]You have a large number of small Git commits
+[]Your commit messages are meaningful
+[]You made the changes in a commit that relate to the commit message
+[]You don't include changes in a commit that aren't related to the commit message

@@ -1,18 +1,7 @@
 <h3><%= meal.meal_type %> - <%= to_date(meal.created_at) %></h3>
-
-<ul>
-<% meal.food_items.each do |food| %>
-  <ul>
-    <form>
-    <li>Name: <%= food.name %></li><br>
-    <li>Serving Size: <%= food.serving_size %></li><br>
-    <li>Number of Servings: <%= food.num_servings %></li><br>
-    <li>Calories: <%= food.calories %></li><br>
-  </form>
-  </ul>
-<% end %>
-</ul>
-
+<p>Calories: <%=meal_calories(meal) %></p>
+<a href="#" class="js-more" data-id= "<%= meal.id%>">More Info</a>
+<ul class="meal-<%= meal.id %> -food_items"> </ul>
 <div class="links">
 
   <%= link_to 'Edit', edit_user_meal_path(current_user, meal) %>

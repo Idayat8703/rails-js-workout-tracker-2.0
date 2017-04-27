@@ -5,5 +5,7 @@
   <% @meals.each do |meal| %>
     <h3><%= meal.meal_type %> - <%= to_date(meal.created_at) %></h3>
     <p>Calories: <%=meal_calories(meal) %></p>
+    <a href="#" class="js-more" data-id ="<=% meal.id %>"> More Info</a>
+    <ul id="meal-<%= meal.id %>-food_items"> </ul>
   <% end %>
 </div>

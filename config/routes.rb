@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   # homepage
   root 'static#home'
+  match 'meals/:id', to: 'meals#show', via: :all
+
 
   # workouts
 

@@ -8,12 +8,11 @@ class MealsController < ApplicationController
 
   # shows a specific meal
   def show
-    respond_to do |f|
-      f.html {render :show}
-      f.json {render json: @meal}
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @meal }
     end
   end
-
   # renders the form for a new meal. Two food items are built
   # so that the nested form for food items will be available.
   def new

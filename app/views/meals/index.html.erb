@@ -7,10 +7,36 @@
     <p>Calories: <%=meal_calories(meal) %></p>
     <a href="#" class="js-more" data-id ="<=% meal.id %>"> More Info</a>
     <ul id="meal-<%= meal.id %>-food_items"> </ul>
+
     <%= link_to 'Edit', edit_user_meal_path(current_user, meal) %>
     <%= link_to 'Delete',user_meal_path(current_user, meal),
                 data: {:confirm => 'Are you sure?'}, :method => :delete %>
     <%= link_to 'Add Workout', new_user_workout_path %>
 
+    <br><br>
+
   <% end %>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-more").on('click', function () {
+    var id = parseInt($(".js-more").attr("data-id"));
+    $.get("/meals/" + id + ".json", function (data) {
+      var foodItems = data["foodItems"];
+      var foodList = "";
+
+      foodItems.forEach(function(food) {
+         foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] '</li><br>';
+        });
+        $("#meal-" + id + "-food_items").html(foodList);
+      })
+
+    })
+
+  })
+
+
+})
+
+</script>

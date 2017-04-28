@@ -5,7 +5,7 @@
   <% @meals.each do |meal| %>
     <h3><%= meal.meal_type %> - <%= to_date(meal.created_at) %></h3>
     <p>Calories: <%=meal_calories(meal) %></p>
-    <a href="#" class="js-more" data-id ="<=% meal.id %>"> More Info</a>
+    <a href="#" class="js-more" data-id="<%= meal.id %>">More Info</a>
     <ul id="meal-<%= meal.id %>-food_items"> </ul>
 
     <%= link_to 'Edit', edit_user_meal_path(current_user, meal) %>
@@ -18,7 +18,7 @@
   <% end %>
 </div>
 
-<script type="text/javascript" charset="utf-8">
+<!-- <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-more").on('click', function () {
     var id = parseInt($(".js-more").attr("data-id"));
@@ -30,13 +30,29 @@ $(function () {
          foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] '</li><br>';
         });
         $("#meal-" + id + "-food_items").html(foodList);
-      })
-
+        $(".js-more").hide();
+      });
+       return false;
     })
-
   })
 
 
-})
+</script> -->
 
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-more").on('click', function() {
+    var id = parseInt($(".js-more").attr("data-id"));
+    $.get("/meals/" + id + ".json", function(data) {
+      var foodItems = data["food_items"];
+      var foodList = "";
+      foodItems.forEach(function(food) {
+        foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] + '</li><br><li>Fat: ' + food["fat"] + '</li><br><li>Cholesterol: ' + food["cholesterol"] + '</li><br><li>Sodium: ' + food["sodium"] + '</li><br><li>Carbs: ' + food["carbs"] + '</li><br><li>Protein: ' + food["protein"] + '</li><br>';
+      });
+      $("#meal-" + id + "-food_items").html(foodList);
+      $(".js-more").hide();
+    });
+    return false;
+  });
+});
 </script>

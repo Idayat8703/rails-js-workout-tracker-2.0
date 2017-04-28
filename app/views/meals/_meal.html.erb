@@ -1,11 +1,14 @@
 <h3><%= meal.meal_type %> - <%= to_date(meal.created_at) %></h3>
-<p>Calories: <%=meal_calories(meal) %></p>
-<a href="#" class="js-more" data-id= "<%= meal.id%>">More Info</a>
-<ul class="meal-<%= meal.id %> -food_items"> </ul>
-<div class="links">
 
-  <%= link_to 'Edit', edit_user_meal_path(current_user, meal) %>
-  <%= link_to 'Delete',user_meal_path(current_user, meal),
+<p>Calories: <%= meal_calories(meal) %></p>
+
+<a href="#" class="js-more" data-id="<%= meal.id %>">More Info</a>
+
+<ul class="meal-<%= meal.id %>-food_items"></ul>
+
+<div class="links">
+  <%= link_to 'View Meal', meal_path(meal) %>
+  <%= link_to 'Edit', [:edit, meal] %>
+  <%= link_to 'Delete', meal_path(meal),
               data: {:confirm => 'Are you sure?'}, :method => :delete %>
-  <%= link_to 'Add Workout', new_user_workout_path %>
 </div>

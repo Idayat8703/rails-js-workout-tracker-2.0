@@ -1,7 +1,9 @@
 class Meal < ApplicationRecord
   belongs_to :user
   has_many :food_items
+  has_many :comments
   validate :meal_type
+
   accepts_nested_attributes_for :food_items, :reject_if => proc {|attributes|
     attributes.all? {|k,v| v.blank?}}, allow_destroy: true
 

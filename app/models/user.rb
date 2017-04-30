@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :workouts
   has_many :meals
+  has_many :comments
   has_many :food_items, :through => :meals
   has_many :total_calories
 

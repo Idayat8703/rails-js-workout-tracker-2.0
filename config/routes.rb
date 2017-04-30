@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match 'meals/:id', to: 'meals#show', via: :all
 
 
+
   # workouts
 
 

@@ -39,7 +39,7 @@ $(function () {
 <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-more").on('click', function() {
-    var id = parseInt($(".js-more").attr("data-id"));
+    var id = parseInt($(this).attr("data-id"));
     $.get("/meals/" + id + ".json", function(data) {
       var foodItems = data["food_items"];
       var foodList = "";
@@ -47,7 +47,7 @@ $(function () {
         foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] + '</li><br>';
       });
       $("#meal-" + id + "-food_items").html(foodList);
-      $(".js-more").hide();
+      $(this).hide();
     });
     return false;
   });

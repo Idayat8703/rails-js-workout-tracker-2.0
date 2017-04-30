@@ -3,3 +3,41 @@
 
   <%= render 'form' %>
 </div>
+
+<div id="workoutResult">
+  <h3 id="workoutDate"></h3>
+  <p id="workoutContent"></p>
+  <p id="workoutCalories"></p>
+  <p id="year"></p>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+function formatDate(date) {
+  var formattedDate = "";
+  var year = "";
+  var month = "";
+  var day = "";
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  year = `${date[0]}${date[1]}${date[2]}${date[3]}`;
+  month = parseInt(`${date[5]}${date[6]}`);
+  day = `${date[8]}${date[9]}`;
+  month = months[month - 1];
+  formattedDate = `${month} ${day}, ${year}`;
+  return formattedDate;
+}
+$(function() {
+  $('form').submit(function(event) {
+    var url = $(this).attr('action')
+    event.preventDefault();
+    var values = $(this).serialize();
+    var posting = $.post(url, values);
+    posting.done(function(data) {
+      var workout = data;
+      $("#workoutDate").text(formatDate(workout["created_at"]));
+      $("#workoutContent").text(workout["content"]);
+      $("#workoutCalories").text("Calories Burned: " + workout["calories_burned"]);
+    });
+    return false;
+  });
+});
+</script>

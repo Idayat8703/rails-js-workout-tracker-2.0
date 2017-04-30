@@ -6,7 +6,7 @@
 
 <br>
 
-  <h3 class="workoutDate"><%=to_date(@workout.created_at)%></h3>
+  <h3 class="workoutDate"><%= to_date(@workout.created_at) %></h3>
   <p class ="workoutContent">Workout: <%=@workout.content %></p>
   <p class "workoutCalories">Calories burned: <%=@workout.calories_burned %></p>
 
@@ -19,9 +19,9 @@
 <script type="text/javascript" charset="utf-8">
 $(function () {
    $(".js-next").on("click", function(){
-     var nextID = parseInt($(".js-next").attr("data-id")) + 1;
+     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
      $.get("/workouts/" + nextId + ".json", function (data) {
-       $(".workoutDate").text(data.created_at);
+       $(".workoutDate").text(data["created_at"]);
        $(".workoutContent").text(data.content);
        $(".workoutCalories").text(data.calories_burned);
        // reset the id to the new current id
@@ -38,8 +38,8 @@ $(function () {
 $(function () {
   $(".js-prev").on("click", function() {
     var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
-    $.get("/workouts/" + nextId + ".json", function (data) {
-      $(".workoutDate").text(data.created_at);
+    $.get("/workouts/" + prevId + ".json", function (data) {
+      $(".workoutDate").text(data["created_at"]);
       $(".workoutContent").text(data.content);
       $(".workoutCalories").text(data.calories_burned);
       // reset the id to the new current id

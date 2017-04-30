@@ -12,4 +12,6 @@
 
   <br>
   <%= link_to 'Edit Workout', edit_user_workout_path(current_user, workout) %>
+  <%= link_to 'Delete',user_workout_path(current_user, workout),
+              data: {:confirm => 'Are you sure?'}, :method => :delete %>
 </div>

@@ -1,5 +1,15 @@
 <div class="content">
   <h2>Workout</h2>
 
-  <%= render :partial => 'workout', :locals => {workout: @workout} %>
+  <a href="#" class="js-prev" data-id="<%= @workout.id %>">Previous Workout</a>
+  <a href="#" class="js-prev" data-id="<%= @workout.id %>">Next Workout</a>
+
+<br>
+
+  <h3 class="workoutDate"><%=to_date(@workout.created_at)%></h3>
+  <p class ="workoutContent">Workout: <%=@workout.content %></p>
+  <p class "workoutCalories">Calories burned: <%=@workout.calories_burned %></p>
+
+  <br>
+  <link_to 'Edit Workout', edit_user_workout_path(current_user, workouts)
 </div>

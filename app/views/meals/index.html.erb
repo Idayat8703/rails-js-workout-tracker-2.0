@@ -50,6 +50,14 @@ $(function () {
         foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] + '</li><br>';
       });
       $("#meal-" + id + "-food_items").html(foodList);
+      $('.new_comment').html('')
+      $.each(data['comments'], function(index, value) {
+        var user = (`<p><strong>${value['user']['email']} says:</strong> `)
+        var body = (`<br>${value['body']}</p>`)
+        var comment = user + body
+        $('.new_comment').append(comment)
+      });
+
       $(this).hide();
     });
     return false;

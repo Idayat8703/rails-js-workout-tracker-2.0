@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   def index
     @comments = Meal.find(params[:meal_id]).comments
     render json: @comments
+    
   end
 
   def create

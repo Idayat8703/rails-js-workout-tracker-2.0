@@ -28,11 +28,13 @@
       var url = $(this).attr('action')
       //prevent form from submitting the default way
       event.preventDefault();
+
       var values = $(this).serialize();
       var posting = $.post(url, values);
       posting.done(function(data) {
 				var newCom = new Comment(data['user']['email'], data['body'])
 				newCom.addComment()
+        $('input[type=submit]').attr('disabled', false)
       });
     });
   });

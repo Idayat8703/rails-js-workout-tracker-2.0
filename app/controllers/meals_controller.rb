@@ -60,7 +60,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:meal_type, food_items_attributes: [
+    params.require(:meal).permit(:meal_type,food_items_attributes: [
       :name,
       :serving_size,
       :num_servings,

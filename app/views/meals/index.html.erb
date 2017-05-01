@@ -12,11 +12,14 @@
     <%= link_to 'Delete',user_meal_path(current_user, meal),
                 data: {:confirm => 'Are you sure?'}, :method => :delete %>
     <%= link_to 'Add Workout', new_user_workout_path %>
-
+    <%= link_to 'Add Comment', user_meal_path(current_user, meal) %>
     <br><br>
 
   <% end %>
 </div>
+
+
+
 
 <!-- <script type="text/javascript" charset="utf-8">
 $(function () {

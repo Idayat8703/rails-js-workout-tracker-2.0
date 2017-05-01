@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    recipe = Meal.find(params[:meal_id])
+    meal= Meal.find(params[:meal_id])
     @comment = meal.comments.new(comment_params)
     @comment.user = current_user
     @comment.save

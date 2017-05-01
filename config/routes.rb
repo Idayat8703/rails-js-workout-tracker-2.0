@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   #users
   resources :users do
     resources :workouts
-    resources :meals
+    resources :meals do
+      resources :comments
+    end
   end
 
 end

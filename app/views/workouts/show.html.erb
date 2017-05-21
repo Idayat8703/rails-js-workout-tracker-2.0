@@ -10,9 +10,9 @@
 
   <br>
 
-  <%= link_to 'Edit Workout', [:edit, @workout] %> 
-  <%= link_to 'Delete', workout_path(@workout),
-            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+  <%= link_to 'Edit Workout', edit_user_workout_path(current_user, @workout) %>
+  <%= link_to 'Delete',user_workout_path(current_user, @workout),
+              data: {:confirm => 'Are you sure?'}, :method => :delete %>
 </div>
 
 <script type="text/javascript" charset="utf-8">

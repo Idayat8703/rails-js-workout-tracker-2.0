@@ -2,56 +2,47 @@
   <h2>Workout</h2>
 
   <a href="#" class="js-prev" data-id="<%= @workout.id %>">Previous Workout</a>
-  <a href="#" class="js-prev" data-id="<%= @workout.id %>">Next Workout</a>
-
-<br>
-
-  <h3 class="workoutDate"><%=to_date(@workout.created_at)%></h3>
   <a href="#" class="js-next" data-id="<%= @workout.id %>">Next Workout</a>
 
-<br>
-
   <h3 class="workoutDate"><%= to_date(@workout.created_at) %></h3>
-  <p class ="workoutContent">Workout: <%=@workout.content %></p>
-  <p class "workoutCalories">Calories burned: <%=@workout.calories_burned %></p>
+  <p class="workoutContent">Workout: <%= @workout.content %></p>
+  <p class="workoutCalories">Calories burned: <%= @workout.calories_burned %></p>
 
   <br>
-  <link_to 'Edit Workout', edit_user_workout_path(current_user, workouts)
-  <%= link_to 'Edit Workout', edit_user_workout_path(current_user, @workout) %>
-  <%= link_to 'Delete',user_workout_path(current_user, @workout),
-              data: {:confirm => 'Are you sure?'}, :method => :delete %>
+
+  <%= link_to 'Edit Workout', [:edit, @workout] %> 
+  <%= link_to 'Delete', workout_path(@workout),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
 </div>
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
-   $(".js-next").on("click", function(){
-     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-     $.get("/workouts/" + nextId + ".json", function (data) {
-       $(".workoutDate").text(data["created_at"]);
-       $(".workoutContent").text(data.content);
-       $(".workoutCalories").text(data.calories_burned);
-       // reset the id to the new current id
-       $(".js-next").attr("data-id", data.id);
-     });
-     return false;
-   });
-
- });
-
+  $(".js-next").on("click", function() {
+    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    $.get("/workouts/" + nextId + ".json", function(data) {
+      $(".workoutDate").text(data["created_at"]);
+      $(".workoutContent").text(data["content"]);
+      $(".workoutCalories").text(data["calories_burned"]);
+      // reset the id to the new current id
+      $(".js-next").attr("data-id", data["id"]);
+    });
+    return false;
+  });
+});
 </script>
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-prev").on("click", function() {
     var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
-    $.get("/workouts/" + prevId + ".json", function (data) {
+    $.get("/workouts/" + prevId + ".json", function(data) {
       $(".workoutDate").text(data["created_at"]);
-      $(".workoutContent").text(data.content);
-      $(".workoutCalories").text(data.calories_burned);
+      $(".workoutContent").text(data["content"]);
+      $(".workoutCalories").text(data["calories_burned"]);
       // reset the id to the new current id
-      $(".js-next").attr("data-id", data.id);
+      $(".js-prev").attr("data-id", data["id"]);
     });
     return false;
-      });
-    });
+  });
+});
 </script>

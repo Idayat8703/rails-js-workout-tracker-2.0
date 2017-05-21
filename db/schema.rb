@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322012324) do
+ActiveRecord::Schema.define(version: 20170430225904) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text    "body"
+    t.integer "user_id"
+    t.integer "meal_id"
+  end
 
   create_table "food_items", force: :cascade do |t|
     t.string   "name"

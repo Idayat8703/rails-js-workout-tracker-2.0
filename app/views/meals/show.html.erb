@@ -2,5 +2,44 @@
   <h2>Workout</h2>
 
   <%= render :partial => 'meal', :locals => {meal: @meal} %>
+<<<<<<< HEAD
 
+=======
+  <br>
+
+  <h3>Comments</h3>
+
+
+    <!-- New comment appended by JS -->
+    <p id="js-comment"></p>
+
+    <!-- New comment form -->
+    <%= form_for [current_user, @meal, Comment.new] do |f| %>
+
+    <%= f.label :body, 'New comment' %><br>
+    <%= f.text_area :body %><br>
+
+    <%= f.submit %>
+
+    <% end %>
+>>>>>>> e919c6ae01c6c3d6d227e9ae935b62610e08f123
 </div>
+
+<!-- Submit comments via form -->
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      var url = $(this).attr('action')
+      //prevent form from submitting the default way
+      event.preventDefault();
+
+      var values = $(this).serialize();
+      var posting = $.post(url, values);
+      posting.done(function(data) {
+				var newCom = new Comment(data['user']['email'], data['body'])
+				newCom.addComment()
+        $('input[type=submit]').attr('disabled', false)
+      });
+    });
+  });
+</script>

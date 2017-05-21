@@ -1,12 +1,12 @@
 <div class="content">
   <h2>Workout</h2>
 
+  <a href="#" class="js-prev" data-id="<%= @workout.id %>">Previous Workout</a>
   <a href="#" class="js-prev" data-id="<%= @workout.id %>">Next Workout</a>
 
 <br>
 
   <h3 class="workoutDate"><%=to_date(@workout.created_at)%></h3>
-
   <a href="#" class="js-next" data-id="<%= @workout.id %>">Next Workout</a>
 
 <br>

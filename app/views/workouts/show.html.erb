@@ -5,15 +5,19 @@
 
   <a href="#" class="js-next" data-id="<%= @workout.id %>">Next Workout</a>
 
-<br>
-
   <h3 class="workoutDate"><%= to_date(@workout.created_at) %></h3>
-  <p class ="workoutContent">Workout: <%=@workout.content %></p>
-  <p class "workoutCalories">Calories burned: <%=@workout.calories_burned %></p>
+  <p class="workoutContent">Workout: <%= @workout.content %></p>
+  <p class="workoutCalories">Calories burned: <%= @workout.calories_burned %></p>
 
   <br>
+<<<<<<< HEAD
   <%= link_to 'Edit Workout', edit_workout_path( @workout) %>
   <%= link_to 'Delete', workout_path( @workout),
+=======
+
+  <%= link_to 'Edit Workout', edit_user_workout_path(current_user, @workout) %>
+  <%= link_to 'Delete',user_workout_path(current_user, @workout),
+>>>>>>> 58d19239f488e45531a4a51338c2fda411afbe00
               data: {:confirm => 'Are you sure?'}, :method => :delete %>
 </div>
 

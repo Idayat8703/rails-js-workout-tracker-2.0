@@ -2,6 +2,7 @@
   <h2>Workout</h2>
 
   <a href="#" class="js-prev" data-id="<%= @workout.id %>">Previous Workout</a>
+
   <a href="#" class="js-next" data-id="<%= @workout.id %>">Next Workout</a>
 
 <br>
@@ -11,8 +12,8 @@
   <p class "workoutCalories">Calories burned: <%=@workout.calories_burned %></p>
 
   <br>
-  <%= link_to 'Edit Workout', edit_user_workout_path(current_user, @workout) %>
-  <%= link_to 'Delete',user_workout_path(current_user, @workout),
+  <%= link_to 'Edit Workout', edit_workout_path( @workout) %>
+  <%= link_to 'Delete', workout_path( @workout),
               data: {:confirm => 'Are you sure?'}, :method => :delete %>
 </div>
 

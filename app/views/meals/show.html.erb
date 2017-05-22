@@ -1,5 +1,5 @@
 <div class="content">
-  <h2>Workout</h2>
+  <h2>Meal</h2>
 
   <%= render :partial => 'meal', :locals => {meal: @meal} %>
   <br>
@@ -15,13 +15,12 @@
 
     <%= f.label :body, 'New comment' %><br>
     <%= f.text_area :body %><br>
-
+``
     <%= f.submit %>
 
     <% end %>
 </div>
 
-<!-- Submit comments via form -->
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('form').submit(function(event) {
@@ -32,8 +31,8 @@
       var values = $(this).serialize();
       var posting = $.post(url, values);
       posting.done(function(data) {
-				var newCom = new Comment(data['user']['email'], data['body'])
-				newCom.addComment()
+        var newCom = new Comment(data['user']['email'], data['body'])
+        newCom.addComment()
         $('input[type=submit]').attr('disabled', false)
       });
     });

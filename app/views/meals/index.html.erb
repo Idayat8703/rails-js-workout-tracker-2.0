@@ -11,54 +11,36 @@
     <%= link_to 'Edit', edit_user_meal_path(current_user, meal) %>
     <%= link_to 'Delete',user_meal_path(current_user, meal),
                 data: {:confirm => 'Are you sure?'}, :method => :delete %>
-    <%= link_to 'Add Workout', new_user_workout_path %>
+    <%= link_to 'Add Workout', new_workout_path %>
     <%= link_to 'Add Comment', user_meal_path(current_user, meal) %>
-    <br><br>
 
-  <% end %>
+
+      <% end %>
 </div>
-
-
-
-
-<!-- <script type="text/javascript" charset="utf-8">
-$(function () {
-  $(".js-more").on('click', function() {
-    var id = parseInt($(".js-more").attr("data-id"));
-    $.get("/meals/" + id + ".json", function(data) {
-      var foodItems = data["food_items"];
-      var foodList = "";
-      foodItems.forEach(function(food) {
-         foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"]
-        });
-        $("#meal-" + id + "-food_items").html(foodList);
-        $(".js-more").hide();
-      });
-       return false;
-    })
-  })
-</script> -->
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
+  function success(data) {
+    var foodItems = data["food_items"];
+    var foodList = "";
+    foodItems.forEach(function(food) {
+      foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] + '</li><br>';
+    });
+    $("#meal-" + data['id'] + "-food_items").html(foodList);
+    $('.new_comment').html('')
+    $.each(data['comments'], function(index, value) {
+      var user = (`<p><strong>${value['user']['email']} says:</strong> `)
+      var body = (`<br>${value['body']}</p>`)
+      var comment = user + body
+      $('.new_comment').append(comment)
+    });
+  }
   $(".js-more").on('click', function() {
     var id = parseInt($(this).attr("data-id"));
-    $.get("/meals/" + id + ".json", function(data) {
-      var foodItems = data["food_items"];
-      var foodList = "";
-      foodItems.forEach(function(food) {
-        foodList += '<li>Name: ' + food["name"] + '</li><br><li>Serving Size: ' + food["serving_size"] + '</li><br><li>Number of Servings: ' + food["num_servings"] + '</li><br>';
-      });
-      $("#meal-" + id + "-food_items").html(foodList);
-      $('.new_comment').html('')
-      $.each(data['comments'], function(index, value) {
-        var user = (`<p><strong>${value['user']['email']} says:</strong> `)
-        var body = (`<br>${value['body']}</p>`)
-        var comment = user + body
-        $('.new_comment').append(comment)
-      });
-
-      $(this).hide();
+    $.ajax({
+      dataType: "json",
+      url: "/meals/" + id,
+      success: success
     });
     return false;
   });

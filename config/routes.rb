@@ -9,13 +9,10 @@ Rails.application.routes.draw do
   match 'meals/:id', to: 'meals#show', via: :all
 
 
-
   # workouts
+  resources :workouts
 
-
-  #users
   resources :users do
-    resources :workouts
     resources :meals do
       resources :comments
     end

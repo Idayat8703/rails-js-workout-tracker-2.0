@@ -5,6 +5,7 @@ class WorkoutsController < ApplicationController
   def index
      @workouts = current_user.workouts
      @beginner_workout =current_user.workouts.beginner
+     @new_workout = User.find(current_user.id).workouts.new
    end
 
   # renders the form to create a new workout
@@ -18,7 +19,9 @@ class WorkoutsController < ApplicationController
      @workout.update(workout_params)
      if @workout.save
        flash[:notice] = "Workout Plan was successfully created"
-       redirect_to workout_path( @workout)
+
+       render json: @workout, status: 201
+
      else
        flash[:error] = "Please update complete the form"
 

@@ -3,4 +3,6 @@ class Workout < ApplicationRecord
   validates :content,  presence: true
   scope :beginner, -> { where('calories_burned < ?', 200) }
 
+  
+
 end

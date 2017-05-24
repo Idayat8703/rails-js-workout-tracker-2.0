@@ -16,7 +16,7 @@
 
     <%= f.label :body, 'New comment' %><br>
     <%= f.text_area :body %><br>
-``
+
     <%= f.submit %>
 
     <% end %>
@@ -34,7 +34,7 @@
       posting.done(function(data) {
         var newCom = new Comment(data['user']['email'], data['body'])
         newCom.addComment()
-        $('input[type=submit]').attr('disabled', false)
+         $('input[type=submit]').attr('disabled', false)
       });
     });
   });

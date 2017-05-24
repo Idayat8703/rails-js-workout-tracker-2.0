@@ -1,5 +1,5 @@
-  <%= form_for( @workout) do |f| %>
-  <form >
+  <%= form_for( new_workout) do |f| %>
+  <form id="form-w" class="form-workout" >
     <div class="form-group ">
       <%= f.label :content %><br>
       <%= f.text_area :content %>

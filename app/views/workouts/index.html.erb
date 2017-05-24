@@ -1,13 +1,79 @@
 <div class="content">
 
-  <% @beginner_workout.each do |level| %>
+
+
+
+<% @beginner_workout.each do |level| %>
     <%= render :partial => 'burned', :locals => {workout: level} %><br><br>
   <% end %>
 
 
-  <div class="add"><%= link_to "Add Workout", new_workout_path %></div>
+  <button class="add-workout" id="add-w"> Add Workout </button>
+
+  <%= render :partial => 'form', :locals => {new_workout: @new_workout} %><br><br>
+
+  <!-- <div class ="appendWorkout" id="appendWorkout">Content And Calories Burned:</div><div class = "content_w"></div>
+  <div class ="appendWorkout" id="appendWorkout">Calories Burned:</div><div class = "calories_burned"></div> -->
+
+
+  <!-- <div class="add"><%= link_to "Add Workout", new_workout_path %></div> -->
   <h2>Your Workouts</h2>
-  <% @workouts.each do |workout| %>
-    <%= render :partial => 'workout', :locals => {workout: workout} %><br><br>
-  <% end %>
+  <div id="workouts">
+    <% @workouts.each do |workout| %>
+      <%= render :partial => 'workout', :locals => {workout: workout} %><br><br>
+    <% end %>
+
+  </div>
+
 </div>
+
+
+<!-- # Create button to add workout
+ # Make form style=“display: none;”
+ # When button is clicked the form style changes to style=“display: block;”
+ # The form will be added to the Dom with blank inputs, when a user fills out the inputs and clicks on submit it will make an AJAX POSt request to the server to create a workout
+ # When a 201 status returns from the server with the new workout object,append that item to the top of the workout list and clear out the form. -->
+
+<script type="text/javascript">
+$('#add-w').click(function() {
+
+	$('#new_workout').css({
+        'display': 'block'
+    });
+});
+
+function appendWorkout(workout) {
+    var createdAt = moment(workout.created_at).format("MMM Do YYYY");
+    var showPath = "/workouts/" + workout.id;
+    var html = '<h3 class="container"><a href="' + showPath + '"></a>' + createdAt + '</h3>';
+    html += '<div class="container">Workout:'  + workout.content + '<br> Calories burned:'  + workout.calories_burned + '</div><br>';
+    html += '<strong><a href="' + showPath + '/edit' + '">Edit Workout</a></strong>';
+    html += '<strong><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="'+ showPath +'">Delete</a></strong>';
+    html += '<strong><a href="/users/1/meals/new">Add Meal</a></strong>';
+    $('#workouts').prepend(html);
+};
+
+$("#new_workout").on('submit', function (event) {
+   event.preventDefault();
+   var data = {
+     workout: {
+       content: $('#workout_content').val(),
+       calories_burned: $('#workout_calories_burned').val()
+     }
+   }
+    $.ajax({
+    type: "POST",
+    url: "/workouts",
+    data: data,
+    success: function(data) {
+        appendWorkout(data);
+        $("#new_workout").trigger("reset");
+    },
+    error: function() {
+      alert("Error");
+    }
+  });
+});
+
+
+</script>

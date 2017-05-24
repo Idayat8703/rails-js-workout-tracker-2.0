@@ -34,7 +34,7 @@
       posting.done(function(data) {
         var newCom = new Comment(data['user']['email'], data['body'])
         newCom.addComment()
-        $('input[type=submit]').attr('disabled', false)
+         $('input[type=submit]').attr('disabled', false)
       });
     });
   });

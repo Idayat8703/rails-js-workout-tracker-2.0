@@ -7,20 +7,24 @@
     <%= render :partial => 'burned', :locals => {workout: level} %><br><br>
   <% end %>
 
-<div class ="appendWorkout" id="appendWorkout">Content And Calories Burned</div><div class = "content_w"></div>
-<div class ="appendWorkout" id="appendWorkout">Calories Burned:</div><div class = "calories_burned"></div>
 
   <button class="add-workout" id="add-w"> Add Workout </button>
 
   <%= render :partial => 'form', :locals => {new_workout: @new_workout} %><br><br>
 
+  <div class ="appendWorkout" id="appendWorkout">Content And Calories Burned:</div><div class = "content_w"></div>
+  <div class ="appendWorkout" id="appendWorkout">Calories Burned:</div><div class = "calories_burned"></div>
 
 
-  <div class="add"><%= link_to "Add Workout", new_workout_path %></div>
+  <!-- <div class="add"><%= link_to "Add Workout", new_workout_path %></div> -->
   <h2>Your Workouts</h2>
-  <% @workouts.each do |workout| %>
-    <%= render :partial => 'workout', :locals => {workout: workout} %><br><br>
-  <% end %>
+  <div id="workouts">
+    <% @workouts.each do |workout| %>
+      <%= render :partial => 'workout', :locals => {workout: workout} %><br><br>
+    <% end %>
+
+  </div>
+
 </div>
 
 
@@ -38,11 +42,20 @@ $('#add-w').click(function() {
     });
 });
 
+function appendWorkout(workout) {
+    var createdAt = moment(workout.created_at).format("MMM Do YY");
+    var showPath = "/workouts/" + workout.id;
+    var html = '<h3 class="container"><a href="' + showPath + '"></a>' + createdAt + '</h3>';
+    html += '<div class="container">Workout:' + workout.content + '<br> Calories burned:' + workout.calories_burned + '</div><br>';
+    html += '<strong><a href="' + showPath + '/edit' + '">Edit Workout</a></strong>';
+    html += '<strong><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="'+ showPath +'">Delete</a></strong>';
+    html += '<strong><a href="/users/1/meals/new">Add Meal</a></strong>';
+    $('#workouts').prepend(html);
+};
 
 $("#new_workout").on('submit', function (event) {
    event.preventDefault();
-   console.log("Form submitted");
-   var newworkout = {
+   var data = {
      workout: {
        content: $('#workout_content').val(),
        calories_burned: $('#workout_calories_burned').val()
@@ -51,19 +64,16 @@ $("#new_workout").on('submit', function (event) {
     $.ajax({
     type: "POST",
     url: "/workouts",
-    data: newworkout,
-    success: function() {
-        $("#appendWorkout").css({'display': 'block' });
-        $(".content_w").html(newworkout.workout.content);
-        $(".calories_burned").html(newworkout.workout.calories_burned);
+    data: data,
+    success: function(data) {
+        appendWorkout(data);
         $("#new_workout").trigger("reset");
     },
     error: function() {
       alert("Error");
     }
   });
+});
 
- });
 
-
-   </script>
+</script>

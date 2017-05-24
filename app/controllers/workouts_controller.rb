@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
 
   # lists all of the current user's workouts
   def index
-     @workouts = current_user.workouts.order("created_at ASC")
+     @workouts = current_user.workouts.order("created_at DESC")
      @beginner_workout =current_user.workouts.beginner
      @new_workout = User.find(current_user.id).workouts.new
    end

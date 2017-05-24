@@ -1,12 +1,6 @@
-var foo = 1;
-function bar() {
-	if (!foo) {
-		var foo = 10;
-	}
-	console.log(foo);
+myFavColor()
+//outputs Red
+
+function myFavColor() {
+		console.log("Red");
 }
-bar();
-
-
-var hi = 20
-console.log(hi);

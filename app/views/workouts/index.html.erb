@@ -43,10 +43,10 @@ $('#add-w').click(function() {
 });
 
 function appendWorkout(workout) {
-    var createdAt = moment(workout.created_at).format("MMM Do YY");
+    var createdAt = moment(workout.created_at).format("MMM Do YYYY");
     var showPath = "/workouts/" + workout.id;
     var html = '<h3 class="container"><a href="' + showPath + '"></a>' + createdAt + '</h3>';
-    html += '<div class="container">Workout:' + workout.content + '<br> Calories burned:' + workout.calories_burned + '</div><br>';
+    html += '<div class="container">Workout:'  + workout.content + '<br> Calories burned:'  + workout.calories_burned + '</div><br>';
     html += '<strong><a href="' + showPath + '/edit' + '">Edit Workout</a></strong>';
     html += '<strong><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="'+ showPath +'">Delete</a></strong>';
     html += '<strong><a href="/users/1/meals/new">Add Meal</a></strong>';
